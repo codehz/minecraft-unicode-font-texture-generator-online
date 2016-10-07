@@ -357,7 +357,7 @@ hr {
 		const formatstring = form.elements.formatstring.value;
 		const gridsize = form.elements.gridsize.value;
 		const glyph_sizes_bin = form.elements.glyph_sizes_bin.value;
-		const metamode = form.elements.metamode.value ? getRadio(form.elements.metamode);
+		const metamode = form.elements.metamode.value || getRadio(form.elements.metamode);
 		const pack_format = parseInt(form.elements.pack_format.value);
 		const description_format = form.elements.description_format.value;
 		preview_canvas.width = gridsize * 16;
