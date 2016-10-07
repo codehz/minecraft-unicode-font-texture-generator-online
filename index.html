@@ -367,6 +367,7 @@ hr {
 		ctx.textBaseline = "top";
 		
 		const drawCharAt = (size, ch, x, y) => {
+			ctx.clearRect(x, y, size, size);
 			ctx.fillText(ch, x, y + yoffset);
 			return (n => n > 0xF ? 0xF : n)(ctx.measureText(ch).width / size * 0xF);
 		};
