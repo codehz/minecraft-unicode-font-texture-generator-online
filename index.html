@@ -3,299 +3,286 @@
 <title>Minecraft UNICODE Font Texture Genterator Online</title>
 
 <style>
-html, body {margin: 0; padding: 0;}
-html {
-	background: #aaa;
-	font-family: monospace;
-}
-.root {
-	width: 100vw;
-	height: 100vh;
-	padding-top: 64px;
-	box-sizing: border-box;
-	transition: padding ease .2s;
-	min-width: 700px;
-}
-
-.header {
-	height: 64px;
-	background: #ccc;
-	font-size: 32px;
-	box-sizing: border-box;
-	display: flex;
-	align-items: center;
-	padding: 32px;
-	text-shadow: white 0 0 10px;
-	position: fixed;
-	width: 100vw;
-	top: 0;
-	transition: height ease .2s;
-	z-index: 9;
-	min-width: 700px;
-}
-
-@media screen and (max-width: 1000px) {
-	.header {
-		height: 128px;
+	html,
+	body {
+		margin: 0;
+		padding: 0;
 	}
-	
+
+	html {
+		background: #aaa;
+		font-family: monospace;
+	}
+
 	.root {
-		padding-top: 128px;
+		width: 100vw;
+		height: 100vh;
+		padding-top: 64px;
+		box-sizing: border-box;
+		transition: padding ease .2s;
+		min-width: 700px;
 	}
-}
 
-.content {
-	position: relative;
-	z-index: 0;
-	padding: 32px;
-	display: flex;
-}
+	.header {
+		height: 64px;
+		background: #ccc;
+		font-size: 32px;
+		box-sizing: border-box;
+		display: flex;
+		align-items: center;
+		padding: 32px;
+		text-shadow: white 0 0 10px;
+		position: fixed;
+		width: 100vw;
+		top: 0;
+		transition: height ease .2s;
+		z-index: 9;
+		min-width: 700px;
+	}
 
-.preview {
-	display: flex;
-	background: #ccc;
-	align-items: center;
-	justify-content: flex-end;
-	position: relative;
-}
+	@media screen and (max-width: 1000px) {
+		.header {
+			height: 128px;
+		}
 
-.preview-info {
-	position: absolute;
-	left: 0;
-	top: 288px;
-	min-width: 288px;
-	min-height: 96px;
-	background: #ccc;
-	padding: 16px;
-	box-sizing: border-box;
-}
+		.root {
+			padding-top: 128px;
+		}
+	}
 
-#preview-canvas {
-	width: 256px;
-	height: 256px;
-	background: black;
-	border: 16px solid #ddd;
-}
-
-.panel {
-	flex: 1;
-	background: #bbb;
-	height: 288px;
-	overflow: show;
-}
-
-.panel-content {
-	background: #f7f7f7;
-	margin: 16px;
-	width: calc(100% - 32px);
-}
-
-@media screen and (max-width: 1000px) {
 	.content {
-		flex-direction: column;
+		position: relative;
+		z-index: 0;
+		padding: 32px;
+		display: flex;
 	}
-	
+
+	.preview {
+		display: flex;
+		background: #ccc;
+		align-items: center;
+		justify-content: flex-end;
+		position: relative;
+	}
+
 	.preview-info {
-		position: static;
-		flex: 1;
-		left: initial;
-		top: initial;
-		height: 288px;
-		background: transparent;
+		position: absolute;
+		left: 0;
+		top: 288px;
+		min-width: 288px;
+		min-height: 96px;
+		background: #ccc;
+		padding: 16px;
+		box-sizing: border-box;
 	}
-}
 
-.form {
-	padding: 8px;
-	padding-left: 0;
-	padding-right: 0;
-}
+	#preview-canvas {
+		width: 256px;
+		height: 256px;
+		background: black;
+		border: 16px solid #ddd;
+	}
 
-.form > div {
-	display: flex;
-	font-size: 20px;
-	margin: 16px;
-}
+	.panel {
+		flex: 1;
+		background: #bbb;
+		height: 288px;
+		overflow: show;
+	}
 
-.form > div > .label {
-	width: 256px;
-	height: 32px;
-	display: flex;
-	align-items: center;
-}
+	.panel-content {
+		background: #f7f7f7;
+		margin: 16px;
+		width: calc(100% - 32px);
+	}
 
-.form > div > .input {
-	flex: 1;
-	display: flex;
-	height: 32px;
-}
+	@media screen and (max-width: 1000px) {
+		.content {
+			flex-direction: column;
+		}
 
-.input > label {
-	flex: 1;
-	display: flex;
-	align-items: center;
-}
+		.preview-info {
+			position: static;
+			flex: 1;
+			left: initial;
+			top: initial;
+			height: 288px;
+			background: transparent;
+		}
+	}
 
-.input > input {
-	border: none;
-	background: #bbb;
-	outline: none;
-	margin: 0;
-	padding: 0;
-	width: 100%;
-	height: 100%;
-	font-family: monospace;
-	text-indent: 8px;
-	box-shadow: 0 0 0 0 black, 0 0 0 0 black inset;
-	transition: box-shadow ease .2s, background ease .2s;
-}
+	.form {
+		padding: 8px;
+		padding-left: 0;
+		padding-right: 0;
+	}
 
-.input > input:hover {
-	box-shadow: 0 0 0 1px black, 0 0 0 1px black inset;
-	background: #ccc;
-}
+	.form>div {
+		display: flex;
+		font-size: 20px;
+		margin: 16px;
+	}
 
-.input > input:focus {
-	box-shadow: 0 0 0 2px black, 0 0 0 2px black inset;
-	background: #fff;
-}
+	.form>div>.label {
+		width: 256px;
+		height: 32px;
+		display: flex;
+		align-items: center;
+	}
 
-hr {
-	margin: 0;
-	padding: 0;
-	height: 16px;
-	border: none;
-	background: #bbb;
-}
+	.form>div>.input {
+		flex: 1;
+		display: flex;
+		height: 32px;
+	}
 
-.buttonbar {
-	display: flex;
-	padding: 8px;
-}
+	.input>label {
+		flex: 1;
+		display: flex;
+		align-items: center;
+	}
 
-.buttonbar > button {
-	flex: 1;
-	height: 32px;
-	font-family: monospace;
-	font-size: 20px;
-	border: none;
-	margin: 8px;
-	outline: none;
-	background: #fff;
-	box-shadow: 0 0 0 0 #bbb, 0 0 0 16px #aaa inset;
-	color: black;
-	transition: box-shadow ease .2s, background ease .2s, color ease .2s;
-}
+	.input>input {
+		border: none;
+		background: #bbb;
+		outline: none;
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		height: 100%;
+		font-family: monospace;
+		text-indent: 8px;
+		box-shadow: 0 0 0 0 black, 0 0 0 0 black inset;
+		transition: box-shadow ease .2s, background ease .2s;
+	}
 
-.buttonbar > button:hover {
-	box-shadow: 0 0 0 16px #bbb, 0 0 0 0 #aaa inset;
-}
+	.input>input:hover {
+		box-shadow: 0 0 0 1px black, 0 0 0 1px black inset;
+		background: #ccc;
+	}
 
-.buttonbar > button:active {
-	background: #000;
-	color: white;
-}
+	.input>input:focus {
+		box-shadow: 0 0 0 2px black, 0 0 0 2px black inset;
+		background: #fff;
+	}
+
+	hr {
+		margin: 0;
+		padding: 0;
+		height: 16px;
+		border: none;
+		background: #bbb;
+	}
+
+	.buttonbar {
+		display: flex;
+		padding: 8px;
+	}
+
+	.buttonbar>button {
+		flex: 1;
+		height: 32px;
+		font-family: monospace;
+		font-size: 20px;
+		border: none;
+		margin: 8px;
+		outline: none;
+		background: #fff;
+		box-shadow: 0 0 0 0 #bbb, 0 0 0 16px #aaa inset;
+		color: black;
+		transition: box-shadow ease .2s, background ease .2s, color ease .2s;
+	}
+
+	.buttonbar>button:hover {
+		box-shadow: 0 0 0 16px #bbb, 0 0 0 0 #aaa inset;
+	}
+
+	.buttonbar>button:active {
+		background: #000;
+		color: white;
+	}
 </style>
 
 <div class="root">
-<div class="header">Minecraft UNICODE Font Texture Genterator Online</div>
-<div class="content">
-	<div class="preview">
-		<code class="preview-info">Loading...</code>
-		<canvas id="preview-canvas"></canvas>
-	</div>
-	<div class="panel">
-		<div class="panel-content">
-			<form class="form">
-				<div class="fontname">
-					<div class="label">
-						Font Name:
+	<div class="header">Minecraft UNICODE Font Texture Genterator Online</div>
+	<div class="content">
+		<div class="preview">
+			<code class="preview-info">Loading...</code>
+			<canvas id="preview-canvas"></canvas>
+		</div>
+		<div class="panel">
+			<div class="panel-content">
+				<form class="form">
+					<div class="fontname">
+						<div class="label">
+							Font Name:
+						</div>
+						<div class="input">
+							<input name="fontname" value="monospace" />
+						</div>
 					</div>
-					<div class="input">
-						<input name="fontname" value="monospace"/>
+					<div class="fontsize">
+						<div class="label">
+							Font Size:
+						</div>
+						<div class="input">
+							<input name="fontsize" type="number" min="6" step="1" value="14" />
+						</div>
 					</div>
+					<div class="gridsize">
+						<div class="label">
+							Grid Size:
+						</div>
+						<div class="input">
+							<input name="gridsize" type="number" min="8" step="1" value="16" />
+						</div>
+					</div>
+					<div class="yoffset">
+						<div class="label">
+							Y-axis Offset:
+						</div>
+						<div class="input">
+							<input name="yoffset" type="number" value="0" />
+						</div>
+					</div>
+					<div class="metamode">
+						<div class="label">
+							Meta format
+						</div>
+						<div class="input">
+							<label>
+								<input name="metamode" type="radio" value="pc" checked/>PC
+							</label>
+							<label>
+								<input name="metamode" type="radio" value="pe" />PE
+							</label>
+						</div>
+					</div>
+					<div class="pack_format">
+						<div class="label">
+							pack_format:
+						</div>
+						<div class="input">
+							<input name="pack_format" type="number" value="1" min="1" />
+						</div>
+					</div>
+					<div class="description_format">
+						<div class="label">
+							description format:
+						</div>
+						<div class="input">
+							<input name="description_format" value="FONT %s %dx(%d)" />
+						</div>
+					</div>
+				</form>
+				<hr />
+				<div class="buttonbar">
+					<button id="gen_btn">Generate!</button>
+					<button id="reset_btn">Reset!</button>
 				</div>
-				<div class="fontsize">
-					<div class="label">
-						Font Size:
-					</div>
-					<div class="input">
-						<input name="fontsize" type="number" min="6" step="1" value="14"/>
-					</div>
-				</div>
-				<div class="gridsize">
-					<div class="label">
-						Grid Size:
-					</div>
-					<div class="input">
-						<input name="gridsize" type="number" min="8" step="1" value="16"/>
-					</div>
-				</div>
-				<div class="yoffset">
-					<div class="label">
-						Y-axis Offset:
-					</div>
-					<div class="input">
-						<input name="yoffset" type="number" value="0"/>
-					</div>
-				</div>
-				<div class="formatstring">
-					<div class="label">
-						Output Textures(expr):
-					</div>
-					<div class="input">
-						<input name="formatstring" value="assets/minecraft/textures/font/unicode_page_%02x.png"/>
-					</div>
-				</div>
-				<div class="glyph_sizes_bin">
-					<div class="label">
-						glyph_sizes.bin(expr):
-					</div>
-					<div class="input">
-						<input name="glyph_sizes_bin" value="assets/minecraft/font/glyph_sizes.bin"/>
-					</div>
-				</div>
-				<div class="metamode">
-					<div class="label">
-						Meta format
-					</div>
-					<div class="input">
-						<label>
-							<input name="metamode" type="radio" value="none" />NONE
-						</label>
-						<label>
-							<input name="metamode" type="radio" value="pc" checked/>PC
-						</label>
-						<label>
-							<input name="metamode" type="radio" value="pe" disabled/>PE
-						</label>
-					</div>
-				</div>
-				<div class="pack_format">
-					<div class="label">
-						pack_format:
-					</div>
-					<div class="input">
-						<input name="pack_format" type="number" value="1" min="1"/>
-					</div>
-				</div>
-				<div class="description_format">
-					<div class="label">
-						description format:
-					</div>
-					<div class="input">
-						<input name="description_format" value="FONT %s %dx(%d)"/>
-					</div>
-				</div>
-			</form>
-			<hr />
-			<div class="buttonbar">
-				<button id="gen_btn">Generate!</button>
-				<button id="reset_btn">Reset!</button>
 			</div>
 		</div>
 	</div>
-</div>
 </div>
 <script src="./sprintf.js">
 </script>
@@ -304,110 +291,141 @@ hr {
 <script src="./FileSaver.min.js">
 </script>
 <script>
-(function () {
-	"use strict";
-	const preview_canvas = document.querySelector("#preview-canvas");
-	const preview_info = document.querySelector(".preview-info");
-	const gen_btn = document.querySelector("#gen_btn");
-	const reset_btn = document.querySelector("#reset_btn");
-	const form = document.forms[0];
-	const stripDataurl = dataurl => dataurl.substr(dataurl.indexOf(',') + 1);
-	const updateProgress = ch => preview_info.innerText = sprintf("Process %02x (%5.2f%%)", ch, ch / 0xFF * 100);
-	
-	const lock = (() => {
-		let startStatus = false;
-		let stopStatus = false;
-		return {
-			init() {
-				if (startStatus) {
-					stopStatus = true;
-					return true;
+	(function () {
+		"use strict";
+		const preview_canvas = document.querySelector("#preview-canvas");
+		const preview_info = document.querySelector(".preview-info");
+		const gen_btn = document.querySelector("#gen_btn");
+		const reset_btn = document.querySelector("#reset_btn");
+		const form = document.forms[0];
+		const stripDataurl = dataurl => dataurl.substr(dataurl.indexOf(',') + 1);
+		const updateProgress = ch => preview_info.innerText = sprintf("Process %02x (%5.2f%%)", ch, ch / 0xFF * 100);
+
+		const uuidv4 = () => 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+			var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+			return v.toString(16);
+		});
+
+		const lock = (() => {
+			let startStatus = false;
+			let stopStatus = false;
+			return {
+				init() {
+					if (startStatus) {
+						stopStatus = true;
+						return true;
+					}
+					startStatus = true;
+					stopStatus = false;
+					preview_info.innerText = "Starting...";
+					gen_btn.innerText = "Stop!";
+					return false;
+				},
+				stop() {
+					startStatus = false;
+					preview_info.innerText = "Ready.";
+					gen_btn.innerText = "Generate!";
+				},
+				sholdAbort() {
+					if (stopStatus) {
+						lock.stop();
+						return true;
+					}
+					return false;
 				}
-				startStatus = true;
-				stopStatus = false;
-				preview_info.innerText = "Starting...";
-				gen_btn.innerText = "Stop!";
-				return false;
-			},
-			stop() {
-				startStatus = false;
-				preview_info.innerText = "Ready.";
-				gen_btn.innerText = "Generate!";
-			},
-			sholdAbort() {
-				if (stopStatus) {
-					lock.stop();
-					return true;
-				}
-				return false;
 			}
-		}
-	})();
-	
-	const getRadio = radios => Array.from(radios).find(r => r.checked).value;
-	
-	gen_btn.addEventListener("click", () => {
-		if (lock.init()) return;
-		const zip = new JSZip();
-		const ctx = preview_canvas.getContext('2d');
-		const glyph_sizes = new Uint8Array(64 * 1024);
-		const yoffset = parseInt(form.elements.yoffset.value);
-		const fontsize = form.elements.fontsize.value;
-		const fontname = form.elements.fontname.value;
-		const formatstring = form.elements.formatstring.value;
-		const gridsize = form.elements.gridsize.value;
-		const glyph_sizes_bin = form.elements.glyph_sizes_bin.value;
-		const metamode = form.elements.metamode.value || getRadio(form.elements.metamode);
-		const pack_format = parseInt(form.elements.pack_format.value);
-		const description_format = form.elements.description_format.value;
-		preview_canvas.width = gridsize * 16;
-		preview_canvas.height = gridsize * 16;
-		ctx.fillStyle = "white";
-		ctx.font = sprintf("%dpx %s", fontsize, fontname);
-		ctx.textBaseline = "top";
-		
-		const drawCharAt = (size, ch, x, y) => {
-			ctx.clearRect(x, y, size, size);
-			ctx.fillText(ch, x, y + yoffset);
-			return (n => n > 0xF ? 0xF : n)(ctx.measureText(ch).width / size * 0xF);
-		};
-		const drawPage = (start, grid) => {
-			for (let i = 0; i < 16; i++)
-				for (let j = 0; j < 16; j++)
-					glyph_sizes[(start << 8) + i * 16 + j] = drawCharAt(grid, String.fromCharCode((start << 8) + i * 16 + j), j * grid, i * grid);
-		};
-		const draw = current => {
-			if (lock.sholdAbort()) return ctx.clearRect(0, 0, preview_canvas.width, preview_canvas.height);;
-			updateProgress(current);
-			ctx.clearRect(0, 0, preview_canvas.width, preview_canvas.height);
-			drawPage(current, gridsize);
-			zip.file(sprintf(formatstring, current), stripDataurl(preview_canvas.toDataURL("image/png")), {createFolders: true, base64: true});
-			if (current == 0xff) return finish();
-			setTimeout(() => draw(current + 1), 10);
-		};
-		draw(0);
-		const finish = () => {
-			preview_info.innerText = "storing glyph_sizes.bin";
-			zip.file(glyph_sizes_bin, glyph_sizes, {binary: true, createFolders: true});
+		})();
+
+		const getRadio = radios => Array.from(radios).find(r => r.checked).value;
+
+		gen_btn.addEventListener("click", () => {
+			if (lock.init()) return;
+			const zip = new JSZip();
+			const ctx = preview_canvas.getContext('2d');
+			const glyph_sizes = new Uint8Array(64 * 1024);
+			const yoffset = parseInt(form.elements.yoffset.value);
+			const fontsize = form.elements.fontsize.value;
+			const fontname = form.elements.fontname.value;
+			const gridsize = form.elements.gridsize.value;
+			const metamode = form.elements.metamode.value || getRadio(form.elements.metamode);
+			const pack_format = parseInt(form.elements.pack_format.value);
+			const description_format = form.elements.description_format.value;
+			let formatstring, glyph_sizes_bin
+
 			switch (metamode) {
 				case 'pc':
-					preview_info.innerText = "creating metafile";
-					zip.file("pack.mcmeta", JSON.stringify({pack: {pack_format, description: sprintf(description_format, fontname, gridsize, fontsize)}}, null, '\t'));
-					break;
-				default:
-					preview_info.innerText = "skipping creating meta file.";
+					formatstring = 'assets/minecraft/textures/font/unicode_page_%02x.png'
+					glyph_sizes_bin = 'assets/minecraft/font/glyph_sizes.bin'
+				case 'pe':
+					formatstring = 'font/glyph_%02X.png'
 			}
-			preview_info.innerText = "finish...generating zip file...."
-			zip.generateAsync({type:"blob"}).then(content => {
-				saveAs(content, sprintf("%s x%d(%d).zip", fontname, gridsize, fontsize));
-				lock.stop();
-			});
-		};
-	});
-	reset_btn.addEventListener("click", () => {
-		form.reset();
-	});
-	
-	preview_info.innerText = "Ready."
-})();
+
+			preview_canvas.width = gridsize * 16;
+			preview_canvas.height = gridsize * 16;
+			ctx.fillStyle = "white";
+			ctx.font = sprintf("%dpx %s", fontsize, fontname);
+			ctx.textBaseline = "top";
+
+			const drawCharAt = (size, ch, x, y) => {
+				ctx.clearRect(x, y, size, size);
+				ctx.fillText(ch, x, y + yoffset);
+				return (n => n > 0xF ? 0xF : n)(ctx.measureText(ch).width / size * 0xF);
+			};
+			const drawPage = (start, grid) => {
+				for (let i = 0; i < 16; i++)
+					for (let j = 0; j < 16; j++)
+						glyph_sizes[(start << 8) + i * 16 + j] = drawCharAt(grid, String.fromCharCode((start << 8) + i * 16 + j), j * grid, i * grid);
+			};
+			const draw = current => {
+				if (lock.sholdAbort()) return ctx.clearRect(0, 0, preview_canvas.width, preview_canvas.height);
+				if (metamode == 'pe' && (current == 0xe0 || current == 0xe1)) return setTimeout(() => draw(current + 1), 10);
+				updateProgress(current);
+				ctx.clearRect(0, 0, preview_canvas.width, preview_canvas.height);
+				drawPage(current, gridsize);
+				zip.file(sprintf(formatstring, current), stripDataurl(preview_canvas.toDataURL("image/png")), { createFolders: true, base64: true });
+				if (current == 0xff) return finish();
+				setTimeout(() => draw(current + 1), 10);
+			};
+			draw(0);
+			const finish = () => {
+				if (glyph_sizes_bin) {
+					preview_info.innerText = "storing glyph_sizes.bin";
+					zip.file(glyph_sizes_bin, glyph_sizes, { binary: true, createFolders: true });
+				}
+				switch (metamode) {
+					case 'pc':
+						preview_info.innerText = "creating metafile";
+						zip.file("pack.mcmeta", JSON.stringify({ pack: { pack_format, description: sprintf(description_format, fontname, gridsize, fontsize) } }, null, '\t'));
+						break;
+					case 'pe':
+						preview_info.innerText = "creating metafile";
+						zip.file("manifest.json", JSON.stringify({
+							format_version: pack_format,
+							header: {
+								uuid: uuidv4(),
+								name: sprintf("%s x%d(%d)", fontname, gridsize, fontsize),
+								version: [0, 0, 1],
+								description: sprintf(description_format, fontname, gridsize, fontsize)
+							},
+							modules: [{
+								description: sprintf(description_format, fontname, gridsize, fontsize),
+								version: [0, 0, 1],
+								uuid: uuidv4(),
+								type: "resources"
+							}]
+						}, null, '\t'));
+				}
+				preview_info.innerText = "finish...generating zip file...."
+				zip.generateAsync({ type: "blob" }).then(content => {
+					saveAs(content, sprintf("%s x%d(%d) %s.%s", fontname, gridsize, fontsize, metamode, metamode == 'pc' ? 'zip' : 'mcpack'));
+					lock.stop();
+				});
+			};
+		});
+		reset_btn.addEventListener("click", () => {
+			form.reset();
+		});
+
+		preview_info.innerText = "Ready."
+	})();
 </script>
