@@ -1,308 +1,270 @@
 <!DOCTYPE html>
-<html lang="UTF-8">
-<head>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Minecraft UNICODE Font Texture Genterator Online</title>
-	<style>
-		html,
-		body {
-			margin: 0;
-			padding: 0;
-		}
 
-		html {
-			background: #aaa;
-			font-family: monospace;
-		}
+<title>Minecraft UNICODE Font Texture Genterator Online</title>
 
-		.root {
-			width: 100vw;
-			height: 100vh;
-			padding-top: 64px;
-			box-sizing: border-box;
-			transition: padding ease .2s;
-			min-width: 700px;
-		}
-	
+<style>
+	html,
+	body {
+		margin: 0;
+		padding: 0;
+	}
+	html {
+		background: #aaa;
+		font-family: monospace;
+	}
+	.root {
+		width: 100vw;
+		height: 100vh;
+		padding-top: 64px;
+		box-sizing: border-box;
+		transition: padding ease .2s;
+		min-width: 700px;
+	}
+	.header {
+		height: 64px;
+		background: #ccc;
+		font-size: 32px;
+		box-sizing: border-box;
+		display: flex;
+		align-items: center;
+		padding: 32px;
+		text-shadow: white 0 0 10px;
+		position: fixed;
+		width: 100vw;
+		top: 0;
+		transition: height ease .2s;
+		z-index: 9;
+		min-width: 700px;
+	}
+	@media screen and (max-width: 1000px) {
 		.header {
-			height: 64px;
-			background: #ccc;
-			font-size: 32px;
-			box-sizing: border-box;
-			display: flex;
-			align-items: center;
-			padding: 32px;
-			text-shadow: white 0 0 10px;
-			position: fixed;
-			width: 100vw;
-			top: 0;
-			transition: height ease .2s;
-			z-index: 9;
-			min-width: 700px;
+			height: 128px;
 		}
-
-		@media screen and (max-width: 1000px) {
-			.header {
-				height: 128px;
-			}
-
-			.root {
-				padding-top: 128px;
-			}
+		.root {
+			padding-top: 128px;
 		}
-
+	}
+	.content {
+		position: relative;
+		z-index: 0;
+		padding: 32px;
+		display: flex;
+	}
+	.preview {
+		display: flex;
+		background: #ccc;
+		align-items: center;
+		justify-content: flex-end;
+		position: relative;
+	}
+	.preview-info {
+		position: absolute;
+		left: 0;
+		top: 288px;
+		min-width: 288px;
+		min-height: 96px;
+		background: #ccc;
+		padding: 16px;
+		box-sizing: border-box;
+	}
+	#preview-canvas {
+		width: 256px;
+		height: 256px;
+		background: black;
+		border: 16px solid #ddd;
+	}
+	.panel {
+		flex: 1;
+		background: #bbb;
+		height: 288px;
+		overflow: visible;
+	}
+	.panel-content {
+		background: #f7f7f7;
+		margin: 16px;
+		width: calc(100% - 32px);
+	}
+	@media screen and (max-width: 1000px) {
 		.content {
-			position: relative;
-			z-index: 0;
-			padding: 32px;
-			display: flex;
+			flex-direction: column;
 		}
-
-		.preview {
-			display: flex;
-			background: #ccc;
-			align-items: center;
-			justify-content: flex-end;
-			position: relative;
-		}
-
 		.preview-info {
-			position: absolute;
-			left: 0;
-			top: 288px;
-			min-width: 288px;
-			min-height: 96px;
-			background: #ccc;
-			padding: 16px;
-			box-sizing: border-box;
-		}
-
-		#preview-canvas {
-			width: 256px;
-			height: 256px;
-			background: #272822;
-			border: 16px solid #ddd;
-		}
-
-		.panel {
+			position: static;
 			flex: 1;
-			background: #bbb;
+			left: initial;
+			top: initial;
 			height: 288px;
-			overflow: visible;
+			background: transparent;
 		}
+	}
+	.form {
+		padding: 8px;
+		padding-left: 0;
+		padding-right: 0;
+	}
+	.form>div {
+		display: flex;
+		font-size: 20px;
+		margin: 16px;
+	}
+	.form>div>.label {
+		width: 256px;
+		height: 32px;
+		display: flex;
+		align-items: center;
+	}
+	.form>div>.input {
+		flex: 1;
+		display: flex;
+		height: 32px;
+	}
+	.input>label {
+		flex: 1;
+		display: flex;
+		align-items: center;
+	}
+	.input>input {
+		border: none;
+		background: #bbb;
+		outline: none;
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		height: 100%;
+		font-family: monospace;
+		text-indent: 8px;
+		box-shadow: 0 0 0 0 black, 0 0 0 0 black inset;
+		transition: box-shadow ease .2s, background ease .2s;
+	}
+	.input>input:hover {
+		box-shadow: 0 0 0 1px black, 0 0 0 1px black inset;
+		background: #ccc;
+	}
+	.input>input:focus {
+		box-shadow: 0 0 0 2px black, 0 0 0 2px black inset;
+		background: #fff;
+	}
+	hr {
+		margin: 0;
+		padding: 0;
+		height: 16px;
+		border: none;
+		background: #bbb;
+	}
+	.buttonbar {
+		display: flex;
+		padding: 8px;
+	}
+	.buttonbar>button {
+		flex: 1;
+		height: 32px;
+		font-family: monospace;
+		font-size: 20px;
+		border: none;
+		margin: 8px;
+		outline: none;
+		background: #fff;
+		box-shadow: 0 0 0 0 #bbb, 0 0 0 16px #aaa inset;
+		color: black;
+		transition: box-shadow ease .2s, background ease .2s, color ease .2s;
+	}
+	.buttonbar>button:hover {
+		box-shadow: 0 0 0 16px #bbb, 0 0 0 0 #aaa inset;
+	}
+	.buttonbar>button:active {
+		background: #000;
+		color: white;
+	}
+</style>
 
-		.panel-content {
-			background: #f7f7f7;
-			margin: 16px;
-			width: calc(100% - 32px);
-		}
-
-		@media screen and (max-width: 1000px) {
-			.content {
-				flex-direction: column;
-			}
-
-			.preview-info {
-				position: static;
-				flex: 1;
-				left: initial;
-				top: initial;
-				height: 288px;
-				background: transparent;
-			}
-		}
-
-		.form {
-			padding: 8px;
-			padding-left: 0;
-			padding-right: 0;
-		}
-
-		.form>div {
-			display: flex;
-			font-size: 20px;
-			margin: 16px;
-		}
-
-		.form>div>.label {
-			width: 256px;
-			height: 32px;
-			display: flex;
-			align-items: center;
-		}
-
-		.form>div>.input {
-			flex: 1;
-			display: flex;
-			height: 32px;
-		}
-
-		.input>label {
-			flex: 1;
-			display: flex;
-			align-items: center;
-		}
-
-		.input>input {
-			border: none;
-			background: #bbb;
-			outline: none;
-			margin: 0;
-			padding: 0 5px 0 0;
-			width: 100%;
-			height: 100%;
-			font-family: monospace;
-			text-indent: 8px;
-			box-shadow: 0 0 0 0 black, 0 0 0 0 black inset;
-			transition: box-shadow ease .2s, background ease .2s;
-		}
-
-		.input>input:hover {
-			box-shadow: 0 0 0 1px black, 0 0 0 1px black inset;
-			background: #ccc;
-		}
-
-		.input>input:focus {
-			box-shadow: 0 0 0 2px black, 0 0 0 2px black inset;
-			background: #fff;
-		}
-
-		hr {
-			margin: 0;
-			padding: 0;
-			height: 16px;
-			border: none;
-			background: #bbb;
-		}
-
-		.buttonbar {
-			display: flex;
-			padding: 8px;
-		}
-
-		.buttonbar>button {
-			flex: 1;
-			height: 32px;
-			font-family: monospace;
-			font-size: 20px;
-			border: none;
-			margin: 8px;
-			outline: none;
-			background: #fff;
-			box-shadow: 0 0 0 0 #bbb, 0 0 0 16px #aaa inset;
-			color: black;
-			transition: box-shadow ease .2s, background ease .2s, color ease .2s;
-		}
-
-		.buttonbar>button:hover {
-			box-shadow: 0 0 0 16px #bbb, 0 0 0 0 #aaa inset;
-		}
-
-		.buttonbar>button:active {
-			background: #000;
-			color: white;
-		}
-	</style>
-</head>
-<body>
-	<div class="root">
-		<div class="header">Minecraft UNICODE Font Texture Genterator Online</div>
-		<div class="content">
-			<div class="preview">
-				<code class="preview-info">Loading...</code>
-				<canvas id="preview-canvas"></canvas>
-			</div>
-			<div class="panel">
-				<div class="panel-content">
-					<form class="form">
-						<div class="fontname">
-							<div class="label">
-								Font Name:
-							</div>
-							<div class="input">
-								<input name="fontname" value="monospace" />
-							</div>
+<div class="root">
+	<div class="header">Minecraft UNICODE Font Texture Genterator Online</div>
+	<div class="content">
+		<div class="preview">
+			<code class="preview-info">Loading...</code>
+			<canvas id="preview-canvas"></canvas>
+		</div>
+		<div class="panel">
+			<div class="panel-content">
+				<form class="form">
+					<div class="fontname">
+						<div class="label">
+							Font Name:
 						</div>
-						<div class="fontsize">
-							<div class="label">
-								Font Size:
-							</div>
-							<div class="input">
-								<input name="fontsize" type="number" min="6" step="1" value="14" />
-							</div>
+						<div class="input">
+							<input name="fontname" value="monospace" />
 						</div>
-						<div class="gridsize">
-							<div class="label">
-								Grid Size:
-							</div>
-							<div class="input">
-								<input name="gridsize" type="number" min="8" step="1" value="16" />
-							</div>
-						</div>
-						<div class="yoffset">
-							<div class="label">
-								Y-axis Offset:
-							</div>
-							<div class="input">
-								<input name="yoffset" type="number" value="0" />
-							</div>
-						</div>
-						<div class="metamode">
-							<div class="label">
-								Meta format
-							</div>
-							<div class="input">
-								<label>
-									<input name="metamode" type="radio" value="pc" onclick="change_pack_format()" checked/>PC
-								</label>
-								<label>
-									<input name="metamode" type="radio" value="pe" onclick="change_pack_format()"/>PE
-								</label>
-							</div>
-						</div>
-						<div class="pack_format">
-							<div class="label">
-								pack_format:
-							</div>
-							<div class="input">
-								<input id="pack_format" name="pack_format" type="number" value="1" min="1" />
-							</div>
-						</div>
-						<div class="description_format">
-							<div class="label">
-								description format:
-							</div>
-							<div class="input">
-								<input name="description_format" value="FONT %s %dx(%d)" />
-							</div>
-						</div>
-					</form>
-					<hr />
-					<div class="buttonbar">
-						<button id="gen_btn">Generate!</button>
-						<button id="reset_btn">Reset!</button>
 					</div>
+					<div class="fontsize">
+						<div class="label">
+							Font Size:
+						</div>
+						<div class="input">
+							<input name="fontsize" type="number" min="6" step="1" value="14" />
+						</div>
+					</div>
+					<div class="gridsize">
+						<div class="label">
+							Grid Size:
+						</div>
+						<div class="input">
+							<input name="gridsize" type="number" min="8" step="1" value="16" />
+						</div>
+					</div>
+					<div class="yoffset">
+						<div class="label">
+							Y-axis Offset:
+						</div>
+						<div class="input">
+							<input name="yoffset" type="number" value="0" />
+						</div>
+					</div>
+					<div class="metamode">
+						<div class="label">
+							Meta format
+						</div>
+						<div class="input">
+							<label>
+								<input name="metamode" type="radio" value="pc" checked/>PC
+							</label>
+							<label>
+								<input name="metamode" type="radio" value="pe" />PE
+							</label>
+						</div>
+					</div>
+					<div class="pack_format">
+						<div class="label">
+							pack_format:
+						</div>
+						<div class="input">
+							<input name="pack_format" type="number" value="1" min="1" />
+						</div>
+					</div>
+					<div class="description_format">
+						<div class="label">
+							description format:
+						</div>
+						<div class="input">
+							<input name="description_format" value="FONT %s %dx(%d)" />
+						</div>
+					</div>
+				</form>
+				<hr />
+				<div class="buttonbar">
+					<button id="gen_btn">Generate!</button>
+					<button id="reset_btn">Reset!</button>
 				</div>
 			</div>
 		</div>
 	</div>
-</body>
-<script src="./sprintf.js"></script>
-<script src="./jszip.min.js"></script>
-<script src="./FileSaver.min.js"></script>
-<script src="./jquery-3.4.1.min.js"></script>
+</div>
+<script src="./sprintf.js">
+</script>
+<script src="./jszip.min.js">
+</script>
+<script src="./FileSaver.min.js">
+</script>
 <script>
-	function change_pack_format() {
-		const form = document.forms[0];
-		const metamode = form.elements.metamode.value || getRadio(form.elements.metamode);
-		if(metamode=="pe"){
-			$("#pack_format").attr("readOnly","true");
-			$("#pack_format").val(1);
-		}else if(metamode=="pc"){
-			$("#pack_format").attr("readOnly",false);
-		}
-	}
-
 	(function () {
 		"use strict";
 		const preview_canvas = document.querySelector("#preview-canvas");
@@ -316,7 +278,6 @@
 			var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
 			return v.toString(16);
 		});
-
 		const lock = (() => {
 			let startStatus = false;
 			let stopStatus = false;
@@ -346,9 +307,7 @@
 				}
 			}
 		})();
-
 		const getRadio = radios => Array.from(radios).find(r => r.checked).value;
-
 		gen_btn.addEventListener("click", () => {
 			if (lock.init()) return;
 			const zip = new JSZip();
@@ -362,7 +321,6 @@
 			const pack_format = parseInt(form.elements.pack_format.value);
 			const description_format = form.elements.description_format.value;
 			let formatstring, glyph_sizes_bin
-
 			switch (metamode) {
 				case 'pc':
 					formatstring = 'assets/minecraft/textures/font/unicode_page_%02x.png'
@@ -372,13 +330,11 @@
 					formatstring = 'font/glyph_%02X.png'
 					break;
 			}
-
 			preview_canvas.width = gridsize * 16;
 			preview_canvas.height = gridsize * 16;
 			ctx.fillStyle = "white";
 			ctx.font = sprintf("%dpx %s", fontsize, fontname);
 			ctx.textBaseline = "top";
-
 			const drawCharAt = (size, ch, x, y) => {
 				ctx.clearRect(x, y, size, size);
 				ctx.fillText(ch, x, y + yoffset);
@@ -433,14 +389,11 @@
 					saveAs(content, sprintf("%s x%d(%d) %s.%s", fontname, gridsize, fontsize, metamode, metamode == 'pc' ? 'zip' : 'mcpack'));
 					lock.stop();
 				});
-				ctx.clearRect(0, 0, preview_canvas.width, preview_canvas.height);
 			};
 		});
 		reset_btn.addEventListener("click", () => {
 			form.reset();
 		});
-
 		preview_info.innerText = "Ready."
 	})();
 </script>
-</html>
